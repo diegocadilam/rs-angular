@@ -78,6 +78,10 @@ label {
   border: 1px solid rgb(23, 23, 154);
 }
 
+.custom-input-group {
+  margin-bottom: 20px !important;
+}
+
 .custom-input-group:has(input:focus) label {
   color: rgb(23, 23, 154);
 }
