@@ -1,4 +1,4 @@
-<div class="d-flex flex-column align-items-center">
+<form #form="ngForm" novalidate class="d-flex flex-column align-items-center">
   <div class="content-titles">
     <h1 class="fw-bold custom-title">Geração de certificados</h1>
     <p class="custom-subtitle mb-2">Preencha os dados para gerar um novo certificado</p>
@@ -6,32 +6,48 @@
   <div class="custom-card w-100">
     <h2 class="card-title">Novo certificado</h2>
     <div class="mb-3 custom-input-group">
-      <label for="nome" class="form-label">Nome</label>
-      <input id="nome" type="text" class="form-control custom-input" placeholder="Nome do aluno">
-      <div class="error-message d-flex align-items-center">
-        <i class="ph ph-warning-circle"></i>
-        <p class="m-0">Error message</p>
-      </div>
+      <label [ngClass]="{'text-danger-label' : campoInvalido(nomeRef)}" for="nome" class="form-label">Nome</label>
+      <input name="nome" id="nome" [(ngModel)]="nome" #nomeRef="ngModel" required maxlength="150" type="text" class="form-control custom-input" placeholder="Nome do aluno">
+
+      @if(campoInvalido(nomeRef))
+      {
+        <div class="error-message d-flex align-items-center">
+          <i class="ph ph-warning-circle"></i>
+          <p class="m-0">Nome do aluno é obrigatório</p>
+        </div>
+      }
     </div>
     <div class="mb-3 d-flex align-items-end custom-input-group">
       <div class="flex-grow-1 me-2">
-        <label for="atividade" class="form-label">Atividade</label>
-        <input id="atividade" type="text" class="form-control custom-input" placeholder="Atividade exercida">
+        <label [ngClass]="{'text-danger-label' : campoInvalido(atividadeRef)}"  for="atividade" class="form-label">Atividade</label>
+        <input name="atividade" [(ngModel)]="atividade" #atividadeRef="ngModel" maxlength="50" required id="atividade" type="text" class="form-control custom-input" placeholder="Atividade exercida">
+
+        @if(campoInvalido(atividadeRef))
+        {
+          <div class="error-message d-flex align-items-center">
+            <i class="ph ph-warning-circle"></i>
+            <p class="m-0">Nome da atividade é obrigatório</p>
+          </div>
+        }
       </div>
-      <app-secundary-button></app-secundary-button>
+      <app-secundary-button [ngStyle]="campoInvalido(atividadeRef) ? {'margin-bottom': '24px'} : {}"></app-secundary-button>
     </div>
     <div class="atividade-group">
       <label class="form-label">Lista de atividades</label>
       <div class="item-list w-100">
+      @for (atividade of atividades; track $index) {
         <div class="item">
-          <span class="item-text">Configuração com Angular CLIL</span>
+          <span class="item-text">{{atividade}}</span>
           <div class="remove-btn">
             <i class="ph-bold ph-x"></i>
           </div>
         </div>
-        <hr>
+        @if (($index  + 1)!= atividades.length) {
+          <hr>
+        }
+      }
       </div>
     </div>
     <app-primary-button></app-primary-button>
   </div>
-</div>
+</form>

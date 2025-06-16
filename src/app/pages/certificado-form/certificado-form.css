@@ -109,3 +109,7 @@ label {
 .custom-input-group:has(.error-message) > input {
   border: 1px solid red;
 }
+
+.text-danger-label{
+  color: red;
+}
