@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class CertificadoForm {
   nome: string = '';
   atividade: string = '';
-  atividades: string[] = ['React', 'Angular', 'Java'];
+  atividades: string[] = [];
 
   campoInvalido(control: NgModel){
     return control.invalid && control.touched;
@@ -21,5 +21,14 @@ export class CertificadoForm {
 
   formularioValido() {
     return this.atividades.length > 0 && this.nome.length > 0;
+  }
+
+  adicionarAtividade() {
+    this.atividades.push(this.atividade);
+    this.atividade = '';
+  }
+
+  excluirAtividade(index: number){
+    this.atividades.splice(index);
   }
 }
