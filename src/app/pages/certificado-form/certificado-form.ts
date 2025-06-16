@@ -3,6 +3,7 @@ import { SecundaryButton } from "../../_components/secundary-button/secundary-bu
 import { PrimaryButton } from "../../_components/primary-button/primary-button";
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Certificado } from "../../interfaces/certificado";
 
 @Component({
   selector: 'app-certificado-form',
@@ -11,24 +12,34 @@ import { CommonModule } from '@angular/common';
   styleUrl: './certificado-form.css'
 })
 export class CertificadoForm {
-  nome: string = '';
   atividade: string = '';
-  atividades: string[] = [];
+
+  certificado: Certificado = {
+    nome: '',
+    atividades: []
+  };
 
   campoInvalido(control: NgModel){
     return control.invalid && control.touched;
   }
 
   formularioValido() {
-    return this.atividades.length > 0 && this.nome.length > 0;
+    return this.certificado.atividades.length > 0 && this.certificado.nome.length > 0;
   }
 
   adicionarAtividade() {
-    this.atividades.push(this.atividade);
+    this.certificado.atividades.push(this.atividade);
     this.atividade = '';
   }
 
   excluirAtividade(index: number){
-    this.atividades.splice(index);
+    this.certificado.atividades.splice(index);
+  }
+
+  submit() {
+    if(!this.formularioValido())
+    {
+      return;
+    }
   }
 }
