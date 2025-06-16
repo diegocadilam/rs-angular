@@ -18,4 +18,8 @@ export class CertificadoForm {
   campoInvalido(control: NgModel){
     return control.invalid && control.touched;
   }
+
+  formularioValido() {
+    return this.atividades.length > 0 && this.nome.length > 0;
+  }
 }
