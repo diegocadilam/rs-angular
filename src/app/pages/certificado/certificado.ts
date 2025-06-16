@@ -7,4 +7,4 @@ import { SecundaryButton } from "../../_components/secundary-button/secundary-bu
   templateUrl: './certificado.html',
   styleUrl: './certificado.css',
 })
-export class CertificadoComponent {}
+export class Certificado {}
