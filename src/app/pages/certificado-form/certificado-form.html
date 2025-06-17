@@ -22,7 +22,7 @@
         <label  for="atividade" class="form-label">Atividade</label>
         <input name="atividade" [(ngModel)]="atividade" #atividadeRef="ngModel" maxlength="50" required id="atividade" type="text" class="form-control custom-input" placeholder="Atividade exercida">
       </div>
-      <app-secundary-button textoBotao="Adicionar" (click)="adicionarAtividade()" [disabled]="atividade.length == 0" phClass="ph ph-plus"></app-secundary-button>
+      <app-secundary-button textoBotao="Adicionar" (click)="adicionarAtividade()" [disabled]="!atividade || atividade.length == 0" phClass="ph ph-plus"></app-secundary-button>
     </div>
     <div class="atividade-group">
       <label class="form-label">Lista de atividades</label>
@@ -40,6 +40,6 @@
       }
       </div>
     </div>
-    <app-primary-button textoBotao="Gerar certificado" [disabled]="!formularioValido()"></app-primary-button>
+    <app-primary-button textoBotao="Gerar certificado" [disabled]="!formularioValido()" (click)="submit()"></app-primary-button>
   </div>
 </form>

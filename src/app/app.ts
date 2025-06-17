@@ -1,21 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from "./_components/navbar/navbar";
 import { CommonModule } from '@angular/common';
-import { PrimaryButton } from "./_components/primary-button/primary-button";
-import { SecundaryButton } from "./_components/secundary-button/secundary-button";
-import { ItemCertificado } from "./_components/item-certificado/item-certificado";
+
+
+
 import { BaseUi } from "./_components/base-ui/base-ui";
-import { Certificados } from './pages/certificados/certificados';
-import { CertificadoForm } from "./pages/certificado-form/certificado-form";
+import { CertificadoService } from './_services/certificado-service';
+
+
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar, CommonModule, PrimaryButton, SecundaryButton, ItemCertificado, BaseUi, Certificados, CertificadoForm],
+  imports: [RouterOutlet, Navbar, CommonModule, BaseUi, ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
   protected title = 'gerador-certificado';
   protected exibeNavbar: boolean = true
+
+  constructor(private certificadoService: CertificadoService){}
+
+  ngOnInit(): void {
+    const certificados = localStorage.getItem('certificados');
+
+    this.certificadoService.certificados = certificados ? JSON.parse(certificados) : [];
+  }
 }

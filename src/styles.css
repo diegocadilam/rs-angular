@@ -1,3 +1,8 @@
+body {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+}
+
 .custom-title {
   font-weight: 700;
   font-size: 24px;
